@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stylish Chatbox with Balloons & Firecracker</title>
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Chatbox container styling */
+        .chat-container {
+            width: 350px;
+            height: 450px;
+            background: linear-gradient(to bottom right, #4e73df, #1e3c72);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Chat area styling */
+        .chat-box {
+            flex-grow: 1;
+            padding: 10px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            box-sizing: border-box;
+            font-size: 14px;
+            color: #333;
+        }
+
+        /* Message styling */
+        .chat-box p {
+            margin: 8px 0;
+            padding: 8px 12px;
+            border-radius: 10px;
+            max-width: 75%;
+            word-wrap: break-word;
+        }
+
+        .user-msg {
+            background-color: #007bff;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 0;
+        }
+
+        .bot-msg {
+            background-color: #e2e6ea;
+            color: #333;
+            align-self: flex-start;
+            border-bottom-left-radius: 0;
+        }
+
+        /* Input area styling */
+        .chat-input {
+            display: flex;
+            padding: 10px;
+            background-color: #fff;
+            border-top: 2px solid #ccc;
+            align-items: center;
+        }
+
+        .chat-input input {
+            width: 85%;
+            padding: 8px 12px;
+            border: 2px solid #ccc;
+            border-radius: 20px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .chat-input button {
+            width: 15%;
+            padding: 8px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .chat-input button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Animation for "Designed by Sudarshan" text */
+        .footer-text {
+            text-align: center;
+            font-size: 12px;
+            color: white;
+            margin-top: auto;
+            padding: 10px 0;
+            font-weight: bold;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideIn 2s ease-out forwards;
+        }
+
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Balloon animation */
+        .balloon {
+            position: absolute;
+            width: 50px;
+            height: 70px;
+            border-radius: 50%;
+            bottom: -100px;
+            animation: floatUp 10s infinite ease-in-out;
+        }
+
+        .balloon:nth-child(2) {
+            background-color: #ffbd3e;
+            animation-duration: 12s;
+            animation-delay: 2s;
+        }
+
+        .balloon:nth-child(3) {
+            background-color: #6bff6b;
+            animation-duration: 14s;
+            animation-delay: 4s;
+        }
+
+        .balloon:nth-child(4) {
+            background-color: #6b9bff;
+            animation-duration: 16s;
+            animation-delay: 6s;
+        }
+
+        @keyframes floatUp {
+            0% {
+                bottom: -100px;
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(50px);
+            }
+            100% {
+                bottom: 100vh;
+                transform: translateX(-50px);
+            }
+        }
+
+        /* Firecracker effect */
+        .firecracker {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            background-color: #ff6347;
+            border-radius: 50%;
+            animation: explode 1s forwards;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.5);
+                opacity: 0.6;
+            }
+            100% {
+                transform: scale(0);
+                opacity: 0;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Balloons -->
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+
+    <div class="chat-container">
+        <div class="chat-box" id="chatBox"></div>
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Type a message..." />
+            <button onclick="sendMessage()">Send</button>
+        </div>
+        <!-- Footer text with animation -->
+        <div class="footer-text">Designed by Sudarshan Baral</div> <!-- donot change!!!! --> 
+    </div>
+
+    <script>
+        function sendMessage() {
+            const userInput = document.getElementById('userInput');
+            const chatBox = document.getElementById('chatBox');
+            const message = userInput.value.trim();
+
+            if (message) {
+                // Add user message to chatbox
+                const userMessage = document.createElement('p');
+                userMessage.classList.add('user-msg');
+                userMessage.textContent = 'You: ' + message;
+                chatBox.appendChild(userMessage);
+
+                // Firecracker effect after sending message
+                createFirecracker();
+
+                // Scroll to the bottom of the chatbox
+                chatBox.scrollTop = chatBox.scrollHeight;
+
+                // Clear input field
+                userInput.value = '';
+
+                // Simulate a simple bot reply
+                setTimeout(() => {
+                    const botMessage = document.createElement('p');
+                    botMessage.classList.add('bot-msg');
+                    botMessage.textContent = 'Bot: I received your message: "' + message + '"';
+                    chatBox.appendChild(botMessage);
+
+                    // Scroll to the bottom after bot reply
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                }, 1000); // Simulate bot response delay
+            }
+        }
+
+        // Create firecracker animation
+        function createFirecracker() {
+            const firecracker = document.createElement('div');
+            firecracker.classList.add('firecracker');
+            document.body.appendChild(firecracker);
+
+            // Remove firecracker after animation
+            setTimeout(() => {
+                firecracker.remove();
+            }, 1000);
+        }
+
+        // Allow "Enter" key to send message
+        document.getElementById('userInput').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+
+</body>
+</html>
