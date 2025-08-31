@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jaya Krishna Auto Parts</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      color: #fff;
+      background: #0d0d0d;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: linear-gradient(90deg, #1a1a1a, #333);
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 28px;
+      color: #00ffcc;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #00ffcc; }
+      to { text-shadow: 0 0 20px #00ffcc; }
+    }
+
+    nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #fff;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #00ffcc;
+    }
+
+    .hero {
+      background: url('https://lh3.googleusercontent.com/p/AF1QipNj3KVoYwEdd6GgVkX6I7bGwsfNDcHPGlhrViex=s1360-w1360-h1020-rw') center/cover no-repeat;
+      height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .hero-text {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 30px;
+      border-radius: 15px;
+      animation: zoomIn 1s ease-in-out forwards;
+    }
+
+    @keyframes zoomIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .hero h1 {
+      font-size: 3em;
+      margin-bottom: 15px;
+      color: #00ffcc;
+    }
+
+    .hero p {
+      font-size: 1.2em;
+      margin-bottom: 25px;
+    }
+
+    .btn {
+      position: relative;
+      z-index: 1;
+      background: #000;
+      color: #00ffcc;
+      border: 2px solid transparent;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-weight: bold;
+      overflow: hidden;
+      transition: 0.4s ease-in-out;
+      text-decoration: none;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, #00ffcc, #00bfa6, #00ffcc);
+      background-size: 400% 400%;
+      animation: borderGlow 6s ease infinite;
+      border-radius: 30px;
+    }
+
+    .btn:hover {
+      color: #000;
+      background-color: #00ffcc;
+    }
+
+    @keyframes borderGlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .about, .contact, .services {
+      padding: 60px 40px;
+      background: #1a1a1a;
+      text-align: center;
+    }
+
+    .about h2, .contact h2, .services h2 {
+      color: #00ffcc;
+      margin-bottom: 20px;
+      transition: text-shadow 0.3s;
+    }
+
+    .about h2:hover, .contact h2:hover, .services h2:hover {
+      text-shadow: 0 0 10px #00ffcc;
+    }
+
+    .about p, .contact p, .services p {
+      max-width: 700px;
+      margin: auto;
+      line-height: 1.6;
+    }
+
+    .brands {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 40px;
+      padding: 40px 20px;
+      background: #1a1a1a;
+    }
+
+    .brand img {
+      width: 150px;
+      height: auto;
+      transition: transform 0.3s;
+    }
+
+    .brand img:hover {
+      transform: scale(1.1);
+    }
+
+    footer {
+      background: #111;
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      color: #888;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2em;
+      }
+      .hero p {
+        font-size: 1em;
+      }
+      nav a {
+        margin-left: 10px;
+        font-size: 14px;
+      }
+      .hero-text {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">Jaya Krishna Auto Parts</div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">What We Do</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Your One-Stop Shop for Auto Excellence</h1>
+      <p>We provide premium auto parts with guaranteed performance and reliability.</p>
+      <a href="#services" class="btn">Learn More</a>
+    </div>
+  </section>
+
+  <section id="about" class="about reveal">
+    <h2>About Us</h2>
+    <p>With over 10 years in the auto parts industry, Jaya Krishna Auto Parts is committed to quality, trust, and genuine service excellence.
+
+    जय कृष्ण अटो पार्ट्स पोखराको नयाबजारमा अवस्थित एक प्रतिष्ठित अटो पार्ट्स व्यवसाय हो, जसले विगत १० वर्षदेखि गाडी र ट्र्याक्टरका लागि उच्च गुणस्तरका पार्टपुर्जा प्रदान गर्दै आइरहेको छ। 
+    हामी विशेष रूपमा <strong>महिन्द्रा</strong> गाडीहरू र <strong>ट्र्याक्टर</strong> पार्टपुर्जाहरूको आपूर्ति तथा सेवा कार्यमा केन्द्रित छौं। 
+    हाम्रो लक्ष्य भनेको ग्राहकलाई भरपर्दो, मौलिक र दीर्घकालीन पार्ट्स उपलब्ध गराउनु हो। 
+    तपाईंको सन्तुष्टि नै हाम्रो प्रेरणा हो।</p>
+  </section>
+
+  <section id="services" class="services reveal">
+    <h2>What We Do ?</h2>
+    <p>
+      At Jaya Krishna Auto Parts, we are actively involved in servicing and supplying parts for <strong>Mahindra vehicles</strong>, including <strong>Scorpio</strong> models and various <strong>Tractors</strong>. Our focus is on delivering authentic, reliable components tailored to agricultural and utility vehicles.
+    
+     हामी ग्राहकको आवश्यकताअनुसार <strong>गाडीको मर्मतसम्भार</strong>, <strong>इञ्जिन पार्ट्स</strong>, <strong>ब्रेक सिस्टम</strong>, <strong>क्लच प्लेट</strong>, <strong>ब्याट्री</strong>, <strong>फिल्टर</strong> लगायत अन्य आवश्यक अटो पार्ट्सहरू उपलब्ध गराउँछौं।
+     हाम्रो सेवाको मुख्य उद्देश्य भनेको कृषिक तथा व्यवसायिक गाडीधनीहरूलाई छिटो, भरपर्दो र उचित मूल्यमा अटो पार्ट्स सेवा प्रदान गर्नु हो।
+    हामीसँग अनुभवी टेक्निसियनहरूको सहयोगमा तपाईँको गाडीका समस्या छिटो समाधान गरिन्छ।
+    </p>
+  </section>
+
+  <section class="brands reveal">
+    <div class="brand">
+      <img src="https://cdn.freelogovectors.net/wp-content/uploads/2023/05/mahindra_logo-freelogovectors.net_.png" alt="Mahindra Logo">
+    </div>
+  </section>
+
+  <section id="contact" class="contact reveal">
+    <h2>Contact Us</h2>
+    <p>Proprietor: Shree Krishna Bhandari, Jayaram Bhandari</p>
+    <p>Phone: +977-9856036080, 9856036040</p>
+    <p>Location: Nayabazar, Pokhara</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Jaya Krishna Auto Parts. All rights reserved. <br>
+      Designer: Sudarshan Baral
+    </p>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+        }
+      });
+    }, { threshold: 0.1 });
+
+    reveals.forEach(reveal => {
+      observer.observe(reveal);
+    });
+  </script>
+
+</body>
+</html>
+
